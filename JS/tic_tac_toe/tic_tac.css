@@ -7,16 +7,36 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #C3D2D5;
+    flex-direction: column;
+}
+#msg-container{
+    /* border: 2px solid #22333B; */
+    width: 50vmin;
+    text-align: center;
+    margin-bottom: 3vmin;
+    margin-top: 5vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3vmin;
+    background-color: #83a1a7;
+    border-radius: 10px;
+    padding: 2vmin;
+}
+#winner-msg{
+    font-size: 4vmin;
+    color: #22333B;
 }
 #game-container{
    
-    width: 70vmin;
+    width: 60vmin;
     text-align: center;
 }
 
 #game{
-    width: 60vmin;
-    height: 60vmin;
+    width: 50vmin;
+    height: 50vmin;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -34,15 +54,34 @@ body{
     justify-content: center;
     align-items: center;
     color: #98cfda;
-    font-size: 3rem;
+    font-size: 7vmin;
 }
 
-#reset{
+.box:hover{
+    /* background-color: #0c3345; */
+    opacity: 0.9;
+    cursor: pointer;
+}
+.box:active{
+    scale: 0.9;
+}
+
+#reset, #play-again{
     height: 5vmin;
     width: 15vmin;
     background-color: #98cfda;
     color: #22333B;
-    font-size: 1.25rem;
+    font-size: 2.5vmin;
     border-radius: 5px;
     margin-top: 2vmin;
+}
+
+#turn{
+    font-size: 2.5vmin;
+    color: #22333B;
+    margin-bottom: 2vmin;
+    margin-top: 2vmin;
+}
+#msg-container.hide{
+    display: none;
 }

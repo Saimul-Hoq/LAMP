@@ -1,8 +1,10 @@
-let boxes = document.querySelectorAll('.box');
-let winnerMsgContainer = document.querySelector('#winner-msg');
-let game = document.querySelector('#game');
-
-let player = 'X';
+let msgContainer = document.querySelector("#msg-container");
+let winnerMsg = document.querySelector("#winner-msg");
+let playAgainBtn = document.querySelector("#play-again");
+let turnMsg = document.querySelector("#turn");
+let boxes = document.querySelectorAll(".box");
+let resetBtn = document.querySelector("#reset");
+let currentPlayer = "X";
 let winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -13,62 +15,56 @@ let winningCombinations = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-
-let checkWinner = () => {
-    for(let combination of winningCombinations) {
+let isWinner = () => {
+    for (let combination of winningCombinations) {
         let [a, b, c] = combination;
-        if(boxes[a].innerText === boxes[b].innerText && boxes[b].innerText === boxes[c].innerText && boxes[a].innerText !== '') {
+        if(boxes[a].innerText === boxes[b].innerText && boxes[a].innerText === boxes[c].innerText && boxes[a].innerText !== "") {
             return true;
         }
     }
     return false;
 }
-
 let makeDisabled = () => {
-    for(let box of boxes) {
+    boxes.forEach(box => {
         box.disabled = true;
-    }
+    });
 }
-
 let makeEnabled = () => {
-    for(let box of boxes) {
+    boxes.forEach(box => {
         box.disabled = false;
-        box.innerText = '';
-    }
+        box.innerText = "";
+    });
 }
 
 for(let box of boxes) {
     box.addEventListener("click", () => {
-        box.innerText = player;
-        box.disabled = true;
-        let winnerMsg = document.querySelector('#player');
-       
-        if(checkWinner()) {
-            
-            winnerMsg.innerText = `Player ${player} wins!`;
+        box.style.color = currentPlayer === "X" ? "#62bea1" : "#bda6e3";
+        box.innerText = currentPlayer;
+        
+        if(isWinner()){
             makeDisabled();
-            game.style.width = "20 vmin";
-            game.style.height = "20 vmin";
-            winnerMsgContainer.style.width = "50 vmin";
-            winnerMsgContainer.style.height = "50 vmin";
-
+            winnerMsg.style.color = currentPlayer === "X" ? "#0c503a" : "#3c1a73";
+            winnerMsg.innerText = `Player ${currentPlayer} wins!`;
+            msgContainer.classList.remove("hide");
+            resetBtn.disabled = true;
         }
         else{
-            if(player === 'X'){
-                player = 'O';
-            }
-            else{
-                player = 'X';
-            }
-            winnerMsg.innerText = `Player ${player}'s turn`;
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            turnMsg.innerText = `Player ${currentPlayer}'s turn`;
+            box.disabled = true;
         }
-        
-        
     })
 }
-
-document.querySelector('#reset').addEventListener("click", () => {
+resetBtn.addEventListener("click", () => {
     makeEnabled();
-    player = 'X';
-    document.querySelector('#player').innerText = `Player ${player}'s turn`;
-})
+    currentPlayer = "X";
+    turnMsg.innerText = `Player ${currentPlayer}'s turn`;
+});
+
+playAgainBtn.addEventListener("click", () => {
+    msgContainer.classList.add("hide");
+    makeEnabled();
+    currentPlayer = "X";
+    turnMsg.innerText = `Player ${currentPlayer}'s turn`;
+    resetBtn.disabled = false;
+});

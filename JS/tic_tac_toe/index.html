@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic_Tac_Toe</title>
     <link rel="stylesheet" href="tic_tac.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <div id="game-container">
-        <h2>Tic Tac Toe</h2>
-        <br>
-        <div id="winner-msg-conatiner"><h3 id="player">Player-X</h3></div>
-        
+    <h1>Tic Tac Toe</h1>
+    <div id="msg-container" class="hide">
+        <p id="winner-msg">Hello</p>
+        <button id="play-again">Play Again</button>
+    </div>
+    <div id="game-container">   
+            <p id="turn">Player X's turn</p>     
             <div id="game">
             <button class="box"></button>
             <button class="box"></button>
@@ -24,8 +27,8 @@
             <button class="box"></button>
         </div>
         <br>
-        <button id="reset">Reset</button>
     </div>
+    <button id="reset">Reset</button>
     <script src="tic_tac.js"></script>
 </body>
 </html>
